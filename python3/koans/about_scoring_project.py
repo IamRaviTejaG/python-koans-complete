@@ -34,7 +34,20 @@ from runner.koan import *
 
 def score(dice):
     # You need to write this method
-    pass
+    user_score = 0
+    freq = dict()
+    for _ in dice:
+        freq[_] = dice.count(_)
+    for key, value in freq.items():
+      triplets = value // 3
+      non_triplets = value % 3
+      if key == 1:
+        user_score += triplets * 1000
+        user_score += non_triplets * 100
+      else:
+        user_score += triplets * key * 100
+        user_score += (non_triplets * 50) if key == 5 else 0
+    return user_score
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
